@@ -41,12 +41,14 @@ class SudokuSolver {
     //Check if the validRow only includes one instance of digits from 1 to 9 and or periods (.)
     let regexPattern = /[1-9]?\./g;
     if (regexPattern.test(validRow)) {
-      if (validRow.includes(value) == false) {
-        if (validRow[column - 1] == value) {
-          return "validRow";
-        }
+      if (validRow[column - 1] == value) {
+        return "validRow";
       } else {
-        return "conflict";
+        if (validRow.includes(value) == false) {
+          return "validRow";
+        } else {
+          return "conflict";
+        }
       }
     } else {
       return "conflict";
@@ -86,12 +88,14 @@ class SudokuSolver {
     //Check if validCol includes only one instance of digits from 1 to 9 or periods (.)
     let regexPattern = /[1-9]?\./g;
     if (regexPattern.test(validCol)) {
-      if (validCol.includes(value) == false) {
-        if (validCol[rowIndex[row]] == value) {
-          return "validCol";
-        }
+      if (validCol[rowIndex[row]] == value) {
+        return "validCol";
       } else {
-        return "conflict";
+        if (validCol.includes(value) == false) {
+          return "validCol";
+        } else {
+          return "conflict";
+        }
       }
     } else {
       return "conflict";
@@ -208,12 +212,15 @@ class SudokuSolver {
     for (let i = 0; i < regList.length; i++) {
       if (row + column in regList[i]) {
         let regVal = Object.values(regList[i]);
-        console.log(regVal);
         if (regexPattern.test(regVal)) {
-          if (regVal.includes(value) == false) {
+          if (regList[i][row + column] == value) {
             return "validReg";
           } else {
-            return "conflict";
+            if (regVal.includes(value) == false) {
+              return "validReg";
+            } else {
+              return "conflict";
+            }
           }
         } else {
           return "conflict";

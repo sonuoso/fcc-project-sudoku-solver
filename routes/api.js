@@ -21,7 +21,7 @@ module.exports = function (app) {
           //Check if coordinate includes characters from A to I and digits from 1 to 9
           if (regexPattern.test(coordinate)) {
             //Check if req.body.value is equal to any digit from 1 to 9
-            if (regexValue.test(req.body.value)) {
+            if (req.body.value.length == 1 && regexValue.test(req.body.value)) {
               let rowRes = solver.checkRowPlacement(
                 req.body.puzzle,
                 coordinate[0],
